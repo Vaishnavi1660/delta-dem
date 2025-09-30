@@ -79,9 +79,9 @@ const sessionOptions={
     },
 };
 
-app.get("/",(req,res)=>{
-    res.send("listening to port")
-})
+// app.get("/",(req,res)=>{
+//     res.send("listening to port")
+// })
 
 
 
@@ -116,9 +116,9 @@ app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
 
-// app.all("*", (req, res, next) => {
-//     next(new ExpressError(404, "Page not found"));
-// });
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page not found"));
+});
 
 
 app.use((err,req,res,next)=>{
@@ -132,7 +132,11 @@ app.listen(8080,()=>{
     console.log("server is listening to port");
 });
 
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => {
-//     console.log(`Server is listening on port ${PORT}`);
-// });
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
+
+
+
+///=======================
