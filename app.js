@@ -79,9 +79,9 @@ const sessionOptions={
     },
 };
 
-// app.get("/", (req, res) => {
-//   res.send("Server is live ✅");
-// });
+app.get("/",(req,res)=>{
+    console.log("listening to port")
+})
 
 
 
