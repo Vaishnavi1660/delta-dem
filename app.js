@@ -80,7 +80,7 @@ const sessionOptions={
 };
 
 app.get("/",(req,res)=>{
-    console.log("listening to port")
+    res.send("listening to port")
 })
 
 
