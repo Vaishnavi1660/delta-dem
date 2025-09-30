@@ -2,6 +2,15 @@ if(process.env.NODE_ENV != "production"){
     require('dotenv').config();
 }
 
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+let geocodingClient;
+if (process.env.MAPBOX_TOKEN) {
+    geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+} else {
+    console.warn("Mapbox token not set. Geocoding disabled.");
+}
+
+
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
