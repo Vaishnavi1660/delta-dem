@@ -19,8 +19,7 @@ const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const wrapAsync=require("./utils/wrapAsync.js");
-const expressError=require("./utils/ExpressError.js");
-const ExpressError = require("./utils/ExpressError.js");
+const ExpressError=require("./utils/ExpressError.js");
 const{listingSchema,reviewSchema}=require("./schema.js");
 const Review=require("./models/review.js");
 const session=require("express-session");
@@ -79,9 +78,9 @@ const sessionOptions={
     },
 };
 
-// app.get("/",(req,res)=>{
-//     res.send("listening to port")
-// })
+app.get("/",(req,res)=>{
+    res.redirect("/listings")
+})
 
 
 
@@ -116,15 +115,15 @@ app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
 
-app.all("*", (req, res, next) => {
-    next(new ExpressError(404, "Page not found"));
-});
+// app.all("*", (req, res, next) => {
+//     next(new ExpressError(404, "Page not found"));
+// });
 
 
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="Something went wrong"}=err;
     res.status(statusCode).render("error.ejs",{message});
-    // res.status(statusCode).send(message);
+//     // res.status(statusCode).send(message);
 })
 
 
@@ -132,10 +131,7 @@ app.listen(8080,()=>{
     console.log("server is listening to port");
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
+
 
 
 
